@@ -1,7 +1,10 @@
 # simulations
-Currently I only have one file, feel free to attempt to work on a 2d model of a magnet. Should be somewhat doable. 
+Ok theres a lot of files here. 
 
-The orbits.html file simply prints a big immovable ball, and a small moveable ball, and a finite set of force bits. The small ball is
-set in the right trajectory to get a decent glimpse of the orbit function at work here. 
+Youre probably going to want orbits.html which is just the best gravity simulation I have so far
 
-Edit: nevermind ill deal with this tomorrow. Not in the mood for complications with uploading a stupid file to this dumb website lol if anyone actually reads this...
+Theres a few other interesting ones.
+
+The deal is still up.. Whoever pushes 2d magnets simulation that actually works will have their name on the upper right corner of the simulation on this repository (forever and ever). My name is on the gravity simulation already, so I got to do the easy job lol. 
+
+If no one gets 2d magnets, im gonna eventually just do it myself.
