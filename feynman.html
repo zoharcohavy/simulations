@@ -1,0 +1,139 @@
+<html lang=en>
+<head>
+<meta charset=utf-8>
+    <title>Efil</title>
+    </head>
+    <body onload="init()">
+ 
+ 
+<script>
+        var canvas, ctx, container;
+         canvas = document.createElement( 'canvas' );
+          ctx = canvas.getContext("2d");
+    var balls;
+    var message;
+	var start_time;
+    var number_of_balls;
+	var first_ball;
+	var second_ball;
+	var force_bit_speed;
+	let random_x, random_y;
+	var counter;
+ /*   
+    var gravity = 0.5;  
+    var bounce = 0.7; */
+    var xFriction = 0.1;
+ 
+    function init(){
+       setupCanvas();
+	   start_time = new Date().getTime();
+	   counter = 0;
+	   force_bit_speed = 5;
+      //vy = (Math.random() * -15) + -5;
+	  first_ball = {vx:0, vy:0, x:200, y:400, radius:20, status: 0,   color:"red"};
+       balls = [];
+	   
+	   number_of_balls = 0;
+	   message = "efilism";
+ 
+    }//end init method
+ 
+    function draw() {
+        ctx.clearRect(0,0,canvas.width, canvas.height); 
+        //display some text
+
+	       ctx.fillStyle = "blue";
+           ctx.font = "20px Arial";
+           ctx.fillText(message, 20,20); 
+
+       
+ 
+             //draw balls
+			 
+			ctx.beginPath();
+			ctx.arc(first_ball.x, first_ball.y, first_ball.radius, 0, Math.PI*2, false);
+			ctx.fillStyle = "blue";
+			ctx.fill();
+			ctx.closePath();
+			
+			for (let i = 0; i < balls.length; i++) {
+				ctx.beginPath();
+				ctx.arc(balls[i].x, balls[i].y, balls[i].radius, 0, Math.PI*2, false);
+				ctx.fillStyle = "blue";
+				ctx.fill();
+				ctx.closePath();
+			}
+        
+        ballMovement();
+ 
+    }
+ 
+    setInterval(draw, 1000/35); 
+    
+    
+    
+    
+    function ballMovement(){
+ 
+	   var current_time = new Date().getTime();
+	   var time =  current_time - start_time;	  
+		time = time/10;
+	   
+        
+        //If either wall is hit, change direction on x axis
+		
+		//first_ball.x = time/19;
+		//first_ball.y = 400 - time/10 + time*time/100000;
+		
+		first_ball.y += first_ball.vy;
+		first_ball.x += first_ball.vx;
+		for (let i = 0; i < balls.length; i++) {
+			if (balls[i].y > 2000 || balls[i].y < -200) {
+				//balls[i].y = 0;
+				balls.shift();
+				number_of_balls--;
+			}
+			if (balls[i].x > 2000 || balls[i].x < -200) {
+				balls.shift();
+				number_of_balls--;
+			}
+			balls[i].y += balls[i].vy;
+			balls[i].x += balls[i].vx;
+			if ((balls[i].y >= first_ball.y - first_ball.radius && balls[i].y <= first_ball.y + first_ball.radius) && (balls[i].x >= first_ball.x - first_ball.radius && balls[i].x <= first_ball.x + first_ball.radius)) {
+				first_ball.vx += balls[i].vx/50;
+				balls.shift();
+			}
+		}
+		counter++;
+		if (counter == 10)
+		{
+			random_x = Math.random()*20;
+			random_y = Math.random()*5 + 400;
+			balls.push({vx:force_bit_speed, vy:0, x:random_x, y:random_y, radius:1.5, status:0, color:"red"});
+			number_of_balls++;
+			counter = 0;
+		}
+       
+		var dt = new Date();
+		message = "efil simulator";// + dt.getTime();
+    }
+    
+ 
+     function setupCanvas() {//setup canvas
+ 
+ 
+	container = document.createElement( 'div' );
+	container.className = "container";
+ 
+	canvas.width = window.innerWidth; 
+	canvas.height = window.innerHeight; 
+	document.body.appendChild( container );
+	container.appendChild(canvas);	
+ 
+	ctx.strokeStyle = "#ffffff";
+	ctx.lineWidth =2;	
+}
+ 
+        </script>
+    </body>
+</html>

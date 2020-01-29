@@ -1,0 +1,232 @@
+<html lang=en>
+<head>
+<meta charset=utf-8>
+    <title>Parkour scene physics</title>
+    </head>
+    <body onload="init()">
+ 
+ 
+<script>
+        var canvas, ctx, container;
+         canvas = document.createElement( 'canvas' );
+          ctx = canvas.getContext("2d");
+    var balls;
+	var absorbed_balls;
+    var message;
+	var start_time;
+    var number_of_balls;
+	var first_ball;//zohar maybe
+	var earth;
+ 
+    function init(){
+       setupCanvas();
+	   start_time = new Date().getTime();
+
+      //first ball is me basically but modelled as a sphere. well, its actually a square lol
+	  first_ball = {vx:1, vy:30, x:canvas.width / 2, y:180, radius:10, status: 0,   color:"red"};
+	  earth = {vx:0, vy:0, x:canvas.width / 2, y:2800, radius:2500, status: 0,   color:"red"};
+       balls = [];
+	   absorbed_balls = [];
+
+	   number_of_balls = 0;
+	   message = "";
+ 
+    }//end init method
+ 
+    function draw() { // Drawing all the balls and all the rectangles
+        ctx.clearRect(0,0,canvas.width, canvas.height); 
+        //display some text
+
+	       ctx.fillStyle = "blue";
+           ctx.font = "20px Arial";
+           ctx.fillText(message, 20,20); 
+
+			//ball that is jumping
+			ctx.beginPath();
+			ctx.arc(first_ball.x, first_ball.y, first_ball.radius, 0, Math.PI*2, false);
+			ctx.fillStyle = "blue";
+			ctx.fill();
+			ctx.closePath();
+			
+			//left wall
+			ctx.beginPath();
+			ctx.fillRect(400, 40, 3, 313);
+			ctx.closePath();
+			
+			//roof
+			ctx.beginPath();
+			ctx.fillRect(400, 40, 390, 3);
+			ctx.closePath();
+			
+			//right wall
+			ctx.beginPath();
+			ctx.fillRect(790, 40, 3, 390);
+			ctx.closePath();
+			
+			//right block
+			ctx.beginPath();
+			ctx.fillRect(650, 150, 100, 155);
+			ctx.closePath();
+			
+			//left block
+			ctx.beginPath();
+			ctx.fillRect(480, 200, 100, 110);
+			ctx.closePath();
+			
+			ctx.beginPath();
+			ctx.arc(earth.x, earth.y, earth.radius, 0, Math.PI*2, false);
+			ctx.fillStyle = "blue";
+			ctx.fill();
+			ctx.closePath();
+			
+			//draw the force bits
+			for (let i = 0; i < balls.length; i++) {
+				ctx.beginPath();
+				ctx.arc(balls[i].x, balls[i].y, balls[i].radius, 0, Math.PI*2, false);
+				ctx.fillStyle = "blue";
+				ctx.fill();
+				ctx.closePath();
+			}
+			for (let i = 0; i < absorbed_balls.length; i++) {
+				ctx.beginPath();
+				ctx.arc(absorbed_balls[i].x, absorbed_balls[i].y, absorbed_balls[i].radius, 0, Math.PI*2, false);
+				ctx.fillStyle = "red";
+				ctx.fill();
+				ctx.closePath();
+			}
+        ballMovement();
+ 
+    }
+ 
+    setInterval(draw, 1000/35); 
+    
+    
+    
+    
+    function ballMovement(){
+
+	   var current_time = new Date().getTime();
+	   var time =  current_time - start_time;	  
+		time = time/1000;
+	   
+        
+        //the next stuff is for the motion of the ball, and force bits, try to figure out what im doing (or ask me)
+		//I could probably have modeled it with actual momentum exchanging collisions with the ball and force bits
+		//but i didnt feel like doing that and i do that in my orbits file anyway. on the #simulations channel of my
+		//draftphysics discord 
+		if (time < 1) { // Duration: 1 second
+			first_ball.x = 730;
+			first_ball.y = 140;
+		for (let i = 0; i < 50; i++) {
+		
+			random_x = Math.random()*600 + 300;
+			random_y = Math.random()*20;
+			balls.push({vx:1, vy:20, x:random_x, y:random_y, radius:0.5, status:0, color:"red"});
+			number_of_balls++;
+		}
+		}
+		
+		else if (time < 4.2) { //Duration: 3.2 seconds
+			first_ball.x = 730 - time/19 - 1*time*time*time;
+			first_ball.y = 140;
+			
+		for (let i = 0; i < 50; i++) {
+		
+			random_x = Math.random()*600 + 300;
+			random_y = Math.random()*20;
+			balls.push({vx:1, vy:20, x:random_x, y:random_y, radius:0.5, status:0, color:"red"});
+			number_of_balls++;
+		}
+		}
+		else if (time < 8) {
+			first_ball.x = 655.6 - 10*(time - 4.2);
+			first_ball.y = 1.8*(time - 4.2)*(time - 4.2) - 10*(time - 4.2) + 140;
+		
+			for (let i = 0; i < 30; i++) {
+				random_x = Math.random()*600 + 300;
+				random_y = Math.random()*20;
+				balls.push({vx:1, vy:5, x:random_x, y:random_y, radius:0.5, status:0, color:"red"});
+				number_of_balls++;
+			}						
+		}
+		else if (time < 13) { // Duration: 8.8 seconds
+			first_ball.x = 655.6 - 10*(time - 4.2);
+			first_ball.y = 1.8*(time - 4.2)*(time - 4.2) - 10*(time - 4.2) + 140;
+			
+			for (let i = 0; i < 50; i++) {
+		
+				random_x = Math.random()*600 + 300;
+				random_y = Math.random()*20;
+				balls.push({vx:1, vy:20, x:random_x, y:random_y, radius:0.5, status:0, color:"red"});
+				number_of_balls++;
+			}
+		}
+		else if (time < 15) { // Duration: 2 seconds
+			first_ball.x = 567.6 - 40*(time - 13);
+			first_ball.y = 190;
+			for (let i = 0; i < 50; i++) {
+		
+				random_x = Math.random()*600 + 300;
+				random_y = Math.random()*20;
+				balls.push({vx:1, vy:20, x:random_x, y:random_y, radius:0.5, status:0, color:"red"});
+				number_of_balls++;
+			}
+		}
+		
+		//decide if the force bit gets absorbed by me or if it goes right through me
+		for (let i = 0; i < balls.length; i++) {
+			if (balls[i].y > 600) {
+				//balls[i].y = 0;
+				balls.shift();
+			}
+			balls[i].y += balls[i].vy;
+			
+			if ((balls[i].y >= first_ball.y - first_ball.radius && balls[i].y <= first_ball.y + first_ball.radius) && (balls[i].x >= first_ball.x - first_ball.radius && balls[i].x <= first_ball.x + first_ball.radius)) {
+				absorb = Math.random()*100;
+				if (absorb < 20) {
+					absorbed_balls.push({age:10, x:balls[i].x, y:first_ball.y - first_ball.radius, radius:1, status:0, color:"red"});
+					balls[i].y = 0;
+					balls[i].x = 20;
+				}
+				else {
+					balls[i].y = first_ball.y + first_ball.radius;
+				}
+			}
+		}
+		
+		if (time > 4.2 && time < 4.3) {
+		
+			for (let i = 0; i < 800; i++) {
+		
+				random_x = Math.random()*600 + 300;
+				random_y = Math.random()*600;
+				balls.push({vx:1, vy:5, x:random_x, y:random_y, radius:0.5, status:0, color:"red"});
+				number_of_balls++;
+			}
+		}
+		
+		
+		
+		
+		var dt = new Date();
+		message = "physics stuff";
+    }
+ 
+     function setupCanvas() {//setup canvas
+ 
+ 
+	container = document.createElement( 'div' );
+	container.className = "container";
+ 
+	canvas.width = window.innerWidth; 
+	canvas.height = window.innerHeight; 
+	document.body.appendChild( container );
+	container.appendChild(canvas);	
+ 
+	ctx.strokeStyle = "#ffffff";
+	ctx.lineWidth =2;	
+}
+ 
+        </script>
+    </body>
+</html>
