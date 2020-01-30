@@ -7,6 +7,4 @@ The orbits.html file is the only one where im promising theres nothing weird in 
 
 Theres a few other interesting ones.
 
-The deal is still up.. Whoever pushes 2d magnets simulation that actually works can get credit somewhere. My name is on the gravity simulation already, so I got to do the easy job lol. 
-
-If no one gets 2d magnets, im gonna eventually just do it myself.
+The deal is still up.. Whoever pushes 2d magnets simulation that actually works can get credit somewhere. 
