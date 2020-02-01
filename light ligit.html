@@ -1,7 +1,7 @@
 <html lang=en>
 <head>
 <meta charset=utf-8>
-    <title>Efil</title>
+    <title>Light</title>
     </head>
     <body onload="init()">
  
@@ -14,10 +14,6 @@
     var message;
 	var start_time;
 	var counter = 0;
- /*   
-    var gravity = 0.5;  
-    var bounce = 0.7; */
-    var xFriction = 0.1;
  
     function init(){
        setupCanvas();
@@ -28,7 +24,7 @@
 	   [
 	   //{vx:1, vy:30, x:canvas.width / 2, y:100, radius:20, status: 0,   color:"red"}
 	   ];
-	   message = "efilism";
+	   message = "Light";
  
     }//end init method
  
@@ -52,12 +48,6 @@
 				ctx.fill();
 				ctx.closePath();
 			}
-			/*ctx.beginPath();
-			ctx.arc(balls[1].x, balls[1].y, balls[1].radius, 0, Math.PI*2, false);
-			//ctx.arc(500,200,10,0, Math.PI*2, false);
-            ctx.fillStyle = "blue";
-            ctx.fill();
-            ctx.closePath();*/
         
         ballMovement();
  
@@ -94,20 +84,8 @@
           // balls[0] hits the floor
        
 		var dt = new Date();
-		message = "efil simulator";// + dt.getTime();
+		message = "Light";// + dt.getTime();
     }
-    
-    function xF(){
-             if(vx>0)
-                 vx = vx - xFriction;
-             if(vx<0)
-                 vx = vx + xFriction;
-    }
-    
-    
-    
-    
-    
  
      function setupCanvas() {//setup canvas
  
