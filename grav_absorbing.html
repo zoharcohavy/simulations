@@ -1,7 +1,7 @@
 <html lang=en>
 <head>
 <meta charset=utf-8>
-    <title>Efil</title>
+    <title>Gravity</title>
     </head>
     <body onload="init()">
  
@@ -18,10 +18,6 @@
 	var second_ball;
 	var force_bit_speed;
 	let random_x, random_y;
- /*   
-    var gravity = 0.5;  
-    var bounce = 0.7; */
-    var xFriction = 0.1;
  
     function init(){
        setupCanvas();
@@ -33,7 +29,7 @@
        balls = [];
 	   
 	   number_of_balls = 0;
-	   message = "efilism";
+	   message = "Gravity";
  
     }//end init method
  
@@ -68,12 +64,6 @@
 				ctx.fill();
 				ctx.closePath();
 			}
-			/*ctx.beginPath();
-			ctx.arc(balls[1].x, balls[1].y, balls[1].radius, 0, Math.PI*2, false);
-			//ctx.arc(500,200,10,0, Math.PI*2, false);
-            ctx.fillStyle = "blue";
-            ctx.fill();
-            ctx.closePath();*/
         
         ballMovement();
  
@@ -156,24 +146,11 @@
 			balls.push({vx:-force_bit_speed, vy:0, x:random_x, y:random_y, radius:1, status:0, color:"red"});
 			number_of_balls++;
 		}
-		
-		//balls[0].x += 20*balls[0].vx;
-		//balls[0].y += balls[0].vy;
-		
-		
-        //balls[0].x = 100 + 40*Math.cos((balls[0].v_rot/4)*time/800);
-		//balls[0].y = 200 + 40*Math.sin((balls[0].v_rot/4)*time/800);
-		
-		//balls[0].x += Math.abs((balls[0].v_total - balls[0].v_rot)*time/50);
-		
-		//balls[0].vx += balls[0].ax;
-		//balls[0].vy += balls[0].ay;
-		//continue here
-        
+	    
           // balls[0] hits the floor
        
 		var dt = new Date();
-		message = "efil simulator";// + dt.getTime();
+		message = "Gravity";// + dt.getTime();
     }
     
  
