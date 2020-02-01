@@ -69,7 +69,7 @@ Andrew flynn (UCLA) - Taught me i need to calm down sometimes (in a nice way), a
 Last but definetely not least, Moya Mazorow (SMC) - Taught me some mathematical proof stuff. But more importantly, set theory.
 
 And finally, would like to thank some of my friends who I worked with, well, its not like they helped me that much but I 
-really did need someones company, so thank you Catalina, Angel the Hyrax whisperer, and Perla, for being my friends.
+really did need someones company, so thank you Catalina, Angel the Hyrax whisperer, Perla, and Roman for being my friends.
 
 And finally finally, my jiu jitsu instructors, Alex, Royce, and Kris. Mostly Alex because he mentioned tool to me and then got
 me into playing guitar. Which helped me a ton in summer (2019) of my life because I got to smoke weed and play guitar every day. 
