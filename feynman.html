@@ -1,7 +1,7 @@
 <html lang=en>
 <head>
 <meta charset=utf-8>
-    <title>Efil</title>
+    <title>Absorptions</title>
     </head>
     <body onload="init()">
  
@@ -19,22 +19,18 @@
 	var force_bit_speed;
 	let random_x, random_y;
 	var counter;
- /*   
-    var gravity = 0.5;  
-    var bounce = 0.7; */
-    var xFriction = 0.1;
+
  
     function init(){
        setupCanvas();
 	   start_time = new Date().getTime();
 	   counter = 0;
 	   force_bit_speed = 5;
-      //vy = (Math.random() * -15) + -5;
 	  first_ball = {vx:0, vy:0, x:200, y:400, radius:20, status: 0,   color:"red"};
        balls = [];
 	   
 	   number_of_balls = 0;
-	   message = "efilism";
+	   message = "Absorptions";
  
     }//end init method
  
@@ -115,7 +111,7 @@
 		}
        
 		var dt = new Date();
-		message = "efil simulator";// + dt.getTime();
+		message = "Absorptions";// + dt.getTime();
     }
     
  
