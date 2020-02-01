@@ -24,7 +24,7 @@ Unfortunately I cant pay you for it..
 MY teacher at smc (santa monica college) scared me when he told me theres programs with millions of
 lines. Good thing I know my physics, mwahaha.
 
-All credit so far goes to all my teachers in smc and UCLA, so many amazing teachers
+All credit so far goes to all my teachers in smc and UCLA, so many amazing teachers.
 I will mention my highschool teacher Alec Gomez, who once told me "math is sexy". Something I really needed
 to hear at the time (I think I was in 10th grade when I was just starting to realize how sexy this shit really
 is). He also taught me a ton of math.
@@ -64,13 +64,18 @@ Darwiche, A.Y. (UCLA) - I loved the knowledge I gained in this class, but not mu
 
 Greenberg, G.J. (UCLA) - Taught me some real nice philosophy
 
-Andrew flynn (UCLA) - Taught me i need to calm down sometimes, and also we talked lots of philosophy
+Andrew flynn (UCLA) - Taught me i need to calm down sometimes (in a nice way), and also we talked lots of philosophy
 
-Last but definetely not least, Moya Mazorow (SMC) - Taught me... well, I had no idea what she was saying half the time, but
-it was fun, and she was the best math teacher I had because she was good at grading. She was actually perfect at grading,
-other teachers in the math department need to learn from her *cough *cough. Sorry, something got stuck in my throat. 
-Zhang, L. (UCLA) - Not sure what she taught me, I thought she was messing with me the whole time and im only like 3 weeks
-into her class so far, haha.
+Last but definetely not least, Moya Mazorow (SMC) - Taught me some mathematical proof stuff. But more importantly, set theory.
 
 And finally, would like to thank some of my friends who I worked with, well, its not like they helped me that much but I 
 really did need someones company, so thank you Catalina, Angel the Hyrax whisperer, and Perla, for being my friends.
+
+And finally finally, my jiu jitsu instructors, Alex, Royce, and Kris. Mostly Alex because he mentioned tool to me and then got
+me into playing guitar. Which helped me a ton in summer (2019) of my life because I got to smoke weed and play guitar every day. 
+Its weird because I was suffering quite a bit of depression at the time and could barely get myself to the jiu jitsu mat. Every
+moment of existence at the time was just the worst kind of torture for me, but at least I got to forget all that for 5 minutes
+while I was rolling. 
+
+And thanks wendell for being nice to me when I showed you one of the first simulations I made. Showing people my work would have
+been so much easier if people were more like you.
