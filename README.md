@@ -66,6 +66,8 @@ Greenberg, G.J. (UCLA) - Taught me some real nice philosophy
 
 Andrew flynn (UCLA) - Taught me i need to calm down sometimes (in a nice way), and also we talked lots of philosophy
 
+Bulu-Taciroglu, M. (UCLA) - Taught me about assets and liabilies. I still dont know what equity means
+
 Last but definetely not least, Moya Mazorow (SMC) - Taught me some mathematical proof stuff. But more importantly, set theory.
 
 And finally, would like to thank some of my friends who I worked with, well, its not like they helped me that much but I 
