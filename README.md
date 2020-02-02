@@ -21,7 +21,7 @@ Come to the discord any time I can teach you how magnets work and you can try an
 Unfortunately I cant pay you for it..
 #pioneers #depression #sadness
 
-gary inmendham (youtube) - Taught me a ton of philosophy, how to enjoy art, why I shouldn't kill myself, pretty
+gary inmendham (youtube) - Taught me a ton of philosophy, why I shouldn't kill myself, pretty
 much all the force bit theory, 2+2+2 is too complex for my weak and feeble mind.
 
 Physics: https://www.youtube.com/user/DraftScience
