@@ -25,8 +25,3 @@ gary inmendham (youtube) - Taught me a ton of philosophy, why I shouldn't kill m
 much all the force bit theory, 2+2+2 is too complex for my weak and feeble mind.
 
 Physics: https://www.youtube.com/user/DraftScience
-
-Philosophy: https://www.youtube.com/user/graytaich0
-
-BEWARE: Philosophy is not for anyone under the age of 18. Some people might not be able to handle it at age 21,
-like me. Dont say I didn't warn you
