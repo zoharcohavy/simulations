@@ -9,7 +9,7 @@ https://www.youtube.com/watch?v=h53aRqoQDWY
     Feynman_absorptions (129 lines)
     Feynman_expulsions (136 lines)
 
-Grav_absorbing (174 lines) - Another gravity simulation but the balls only move up and down (the y-axis)
+Grav_absorbing (174 lines) - Another gravity simulation with 2 directions only
 
 Parkour Physics (232 lines) - This one is for a scene used in this video
 https://www.youtube.com/watch?v=rYNdf4m4OZw
