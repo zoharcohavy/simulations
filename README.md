@@ -18,7 +18,6 @@ Light_ligit (107 lines) - Crude implementation for light, missing several detail
 
 https://discord.gg/EHzjqyU
 Come to the discord any time I can teach you how magnets work and you can try and simulate it yourself.
-Unfortunately I cant pay you for it..
-#pioneers #depression #sadness
+and if you do please share it with me first.
 
 Gary's physics channel: https://www.youtube.com/user/DraftScience
