@@ -14,7 +14,8 @@ Grav_absorbing (174 lines) - Another gravity simulation with 2 directions only
 Parkour Physics (232 lines) - This one is for a scene used in this video
 https://www.youtube.com/watch?v=rYNdf4m4OZw
 
-Light_ligit (107 lines) - Crude implementation for light, missing several details
+Light (107 lines) - Crude implementation for light. 
+Update: it is claimed to be blue force (electron force) only. I agree with the claim but still thinking about it.
 
 https://discord.gg/EHzjqyU
 Come to the discord any time I can teach you how magnets work and you can try and simulate it yourself.
