@@ -10,8 +10,7 @@
         var canvas, ctx, container;
          canvas = document.createElement( 'canvas' );
           ctx = canvas.getContext("2d");
-    var red_balls;
-	var black_balls;
+
     var message;
 	var start_time;
 	var first_ball;//electron
