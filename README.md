@@ -1,5 +1,8 @@
 # simulations
-Orbits.html (158 lines) - Best gravity simulation I have so far
+
+Magnetism (250 lines) - best magnetism simulation so far!
+
+Orbits (158 lines) - Best gravity simulation I have so far
 
 Feynman files - Some simple mechanical stuff I used in my feynman vid 
 
