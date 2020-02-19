@@ -1,0 +1,229 @@
+<html lang=en>
+<head>
+<meta charset=utf-8>
+    <title>Electron</title>
+    </head>
+    <body onload="init()">
+ 
+ 
+<script>
+        var canvas, ctx, container;
+         canvas = document.createElement( 'canvas' );
+          ctx = canvas.getContext("2d");
+    var red_balls;
+	var black_balls;
+    var message;
+	var start_time;
+	var first_ball;//electron
+	var distance_from_first_ball, distance_travelled;
+	var second_ball;//proton
+	var force_bit_speed;
+	var expulsion_dir;
+	var random_dir;
+	let random_x, random_y;
+	let random_vx, random_vy;
+	var point_entered_x, point_entered_y, point_exit_x, point_exit_y;
+
+    function init(){
+       setupCanvas();
+	   start_time = new Date().getTime();
+	   counter = 0;
+	   force_bit_speed = 10;
+      //vy = (Math.random() * -15) + -5;
+	  first_ball = {vx:0, vy:0, x:200, y:200, radius:40, status: 0,   color:"red"};
+	  second_ball = {vx:0, vy:0, x:200, y:400, radius:40, status: 0,   color:"red"};
+	  
+	 // north_poll_1 = {vx:0, vy:0, x:200, y:200, width:30, status: 0,   color:"red"};
+	 // south_poll_1 = {vx:0, vy:0, x:200, y:200, width:30, status: 0,   color:"red"};
+
+	 // north_poll_2 = {vx:0, vy:0, x:200, y:200, width:30, status: 0,   color:"red"};
+	 // south_poll_2 = {vx:0, vy:0, x:200, y:200, width:30, status: 0,   color:"red"};	  
+	  
+       red_balls = [];
+	   blue_balls = [];
+	   message = "magnetism";
+ 
+    }//end init method
+ 
+    function draw() {
+        ctx.clearRect(0,0,canvas.width, canvas.height); 
+        //display some text
+
+	       ctx.fillStyle = "blue";
+           ctx.font = "20px Arial";
+           ctx.fillText(message, 20,20); 
+
+       
+ 
+             //draw balls
+			 
+			ctx.beginPath();
+			ctx.arc(first_ball.x, first_ball.y, first_ball.radius, 0, Math.PI*2, false);
+			ctx.fillStyle = "blue";
+			ctx.fill();
+			ctx.closePath();
+			
+			ctx.beginPath();
+			ctx.arc(second_ball.x, second_ball.y, second_ball.radius, 0, Math.PI*2, false);
+			ctx.fillStyle = "blue";
+			ctx.fill();
+			ctx.closePath();
+			
+			for (let i = 0; i < blue_balls.length; i++) {
+				ctx.beginPath();
+				ctx.arc(blue_balls[i].x, blue_balls[i].y, blue_balls[i].radius, 0, Math.PI*2, false);
+				ctx.fillStyle = "blue";
+				ctx.fill();
+				ctx.closePath();
+			}
+			for (let i = 0; i < red_balls.length; i++) {
+				ctx.beginPath();
+				ctx.arc(red_balls[i].x, red_balls[i].y, red_balls[i].radius, 0, Math.PI*2, false);
+				ctx.fillStyle = "red";
+				ctx.fill();
+				ctx.closePath();
+			}
+        
+        ballMovement();
+ 
+    }
+ 
+    setInterval(draw, 1000/35); 
+    
+    
+    
+    
+    function ballMovement(){
+ 
+	   var current_time = new Date().getTime();
+	   var time = current_time - start_time;
+		time = time/10;
+	   
+        
+        //If either wall is hit, change direction on x axis
+
+		first_ball.y += first_ball.vy;
+		first_ball.x += first_ball.vx;
+		for (let i = 0; i < blue_balls.length; i++) {
+			blue_balls[i].age++;
+			if (blue_balls[i].age > 50) {
+				//balls[i].y = 0;
+				blue_balls.shift();
+			}
+			/*if (red_balls[i].x > 2000 || red_balls[i].x < -200) {
+				red_balls.shift();
+				number_of_balls--;
+			}*/
+			blue_balls[i].y += blue_balls[i].vy;
+			blue_balls[i].x += blue_balls[i].vx;
+			
+			if ((blue_balls[i].y >= first_ball.y - first_ball.radius && blue_balls[i].y <= first_ball.y + first_ball.radius) && (blue_balls[i].x >= first_ball.x - first_ball.radius && blue_balls[i].x <= first_ball.x + first_ball.radius)) {
+				//if its in the square of the top ball
+				distance_from_first_ball = Math.pow(blue_balls[i].x - first_ball.x,2) + Math.pow(blue_balls[i].y - first_ball.y,2);
+				distance_from_first_ball = Math.pow(distance_from_first_ball, 0.5);
+				if (distance_from_first_ball <= first_ball.radius) {
+				
+					//WORK HERE NEXT
+					point_entered_x = blue_balls[i].x;
+					point_entered_y = blue_balls[i].y;
+					
+					while (distance_from_first_ball <= first_ball.radius) {
+						blue_balls[i].x += blue_balls[i].vx;
+						blue_balls[i].y += blue_balls[i].vy;
+						distance_from_first_ball = Math.pow(blue_balls[i].x - first_ball.x,2) + Math.pow(blue_balls[i].y - first_ball.y,2);
+						distance_from_first_ball = Math.pow(distance_from_first_ball, 0.5);
+					}
+					point_exit_x = blue_balls[i].x;
+					point_exit_y = blue_balls[i].y;
+					
+					distance_travelled = Math.pow(point_exit_x - point_entered_x, 2) + Math.pow(point_exit_y - point_entered_y,2);
+					distance_travelled = Math.pow(distance_travelled, 0.5);
+					
+					// absorption ratio.. a number between 0 and 1 that indicates how much percent of the object
+					// you actually travelled through. The formula for it is, distance_travelled/diameter since
+					// the diameter is the max distance you can travel.
+					absorption_ratio = distance_travelled/(2*first_ball.radius);
+					
+					first_ball.vy += blue_balls[i].vy/1000;
+					first_ball.vx += blue_balls[i].vx/1000;
+					blue_balls[i].x = 1200;
+				}
+				//balls[i].vy = -balls[i].vy;
+				//balls[i].y += balls[i].vy;
+			}
+			
+			/*if ((red_balls[i].y >= first_ball.y - first_ball.radius && red_balls[i].y <= first_ball.y + first_ball.radius) && (red_balls[i].x >= first_ball.x - first_ball.radius && red_balls[i].x <= first_ball.x + first_ball.radius)) {
+				first_ball.vx += red_balls[i].vx/50;
+				red_balls.shift();
+			}*/
+		}
+		
+		for (let i = 0; i < 10; i++) {
+			
+			expulsion_dir = Math.random()*3.14;
+			random_x = second_ball.x + Math.cos(expulsion_dir)*second_ball.radius*1.01;
+			random_y = second_ball.y - Math.sin(expulsion_dir)*second_ball.radius*1.01;
+			random_dir = -1.57 + expulsion_dir + Math.random()*3.14;
+			random_vx = Math.cos(random_dir)*force_bit_speed;
+			random_vy = -Math.sin(random_dir)*force_bit_speed;
+			blue_balls.push({age: 0, vx:random_vx, vy:random_vy, x:random_x, y:random_y, radius:1, status:0});
+
+		}		
+		
+		for (let i = 0; i < 20; i++) {
+			random_x = Math.random()*600;
+			random_y = Math.random()*20;
+			//blue_balls.push({vx:0, vy:force_bit_speed, x:random_x, y:random_y, radius:1, status:0, color:"red"});
+			//blue_balls.push({vx:0, vy:force_bit_speed, x:random_x, y:random_y, radius:1, status:0});
+			//number_of_balls++;
+			
+			//Now create force bits that come out of the bottom ball (second_ball)
+			
+			expulsion_dir = Math.random()*3.14*2;
+			random_x = first_ball.x + Math.cos(expulsion_dir)*first_ball.radius*1.01;
+			random_y = first_ball.y - Math.sin(expulsion_dir)*first_ball.radius*1.01;
+			random_dir = -1.57 + expulsion_dir + Math.random()*3.14;
+			random_vx = Math.cos(random_dir)*force_bit_speed;
+			random_vy = -Math.sin(random_dir)*force_bit_speed;
+			blue_balls.push({age:0, vx:random_vx, vy:random_vy, x:random_x, y:random_y, radius:1, status:0});
+			
+			/*random_x = Math.random()*600;
+			random_y = Math.random()*20 + 580;
+			balls.push({vx:0, vy:-force_bit_speed, x:random_x, y:random_y, radius:1, status:0, color:"red"});
+			number_of_balls++;
+			
+			random_x = Math.random()*20;
+			random_y = Math.random()*600;
+			balls.push({vx:force_bit_speed, vy:0, x:random_x, y:random_y, radius:1, status:0, color:"red"});
+			number_of_balls++;
+			
+			random_x = Math.random()*20 + 580;
+			random_y = Math.random()*600;
+			balls.push({vx:-force_bit_speed, vy:0, x:random_x, y:random_y, radius:1, status:0, color:"red"});
+			number_of_balls++;*/
+		}
+		
+       
+		var dt = new Date();
+		message = "magnetism stuff";// + dt.getTime();
+    }
+    
+ 
+     function setupCanvas() {//setup canvas
+ 
+ 
+	container = document.createElement( 'div' );
+	container.className = "container";
+ 
+	canvas.width = window.innerWidth; 
+	canvas.height = window.innerHeight; 
+	document.body.appendChild( container );
+	container.appendChild(canvas);	
+ 
+	ctx.strokeStyle = "#ffffff";
+	ctx.lineWidth = 2;	
+}
+ 
+        </script>
+    </body>
+</html>
