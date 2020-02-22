@@ -30,11 +30,11 @@
        setupCanvas();
 	   start_time = new Date().getTime();
 	   counter = 0;
-	   force_bit_speed = 10;
+	   force_bit_speed = 25;
 	   universe_center_x = 200;
 	   universe_center_y = 300;
 	   universe_radius = 500;
-	   max_object_speed = 0.01;
+	   max_object_speed = force_bit_speed/50;
       //vy = (Math.random() * -15) + -5;
 	  first_ball = {vx:0, vy:0, x:200, y:200, radius:40, status: 0,   color:"red"};
 	  second_ball = {vx:0, vy:0, x:200, y:400, radius:40, status: 0,   color:"red"};
@@ -61,7 +61,7 @@
 
        
  
-             //draw balls
+             //draw everything
 			 
 			ctx.beginPath();
 			ctx.arc(first_ball.x, first_ball.y, first_ball.radius, 0, Math.PI*2, false);
@@ -137,42 +137,38 @@
 					
 					blue_balls[i].age = 25;
 					
-					while (distance_from_first_ball <= first_ball.radius) {
-						blue_balls[i].x += blue_balls[i].vx;
-						blue_balls[i].y += blue_balls[i].vy;
-						distance_from_first_ball = Math.pow(blue_balls[i].x - first_ball.x,2) + Math.pow(blue_balls[i].y - first_ball.y,2);
-						distance_from_first_ball = Math.pow(distance_from_first_ball, 0.5);
-					}
-					point_exit_x = blue_balls[i].x;
-					point_exit_y = blue_balls[i].y;
-					
-					distance_travelled = Math.pow(point_exit_x - point_entered_x, 2) + Math.pow(point_exit_y - point_entered_y,2);
-					distance_travelled = Math.pow(distance_travelled, 0.5);
-					
-					// absorption ratio.. a number between 0 and 1 that indicates how much percent of the object
-					// you actually travelled through. The formula for it is, distance_travelled/diameter since
-					// the diameter is the max distance you can travel.
-					distance_ratio = distance_travelled/(2*first_ball.radius);
+					// absorption ratio.. a number between 0 and 1 that tells you the chances
+					// of having a reflection collision vs just having the force bit come out randomly
 					absorption_ratio = Math.random();
-					if (absorption_ratio*distance_ratio  < 0.4) {
+					if (absorption_ratio < 0.4) {
+					// brings out a force bit in a random direction
+						expulsion_dir = 2*Math.random()*3.14;
+						random_x = first_ball.x + Math.cos(expulsion_dir)*first_ball.radius;
+						random_y = first_ball.y - Math.sin(expulsion_dir)*first_ball.radius;
+						random_dir = -1.57 + expulsion_dir + Math.random()*3.14;  //1.57 is pi/2
+						random_vx = -Math.cos(random_dir)*force_bit_speed;
+						random_vy = Math.sin(random_dir)*force_bit_speed;
+						first_ball.vy += blue_balls[i].vy/2000;
+						first_ball.vx += blue_balls[i].vx/2000;
 						
-						blue_balls[i].x += blue_balls[i].vx;
-						blue_balls[i].y += blue_balls[i].vy;
+						blue_balls[i].x = random_x;
+						blue_balls[i].y = random_y;
+						blue_balls[i].vx = random_vx;
+						blue_balls[i].vy = random_vy;
 					}
 					else { // return the force bit in about the same direction as it came
 					// restabalize it and transfer momentum here
-						first_ball.vy += blue_balls[i].vy/2000;
-						first_ball.vx += blue_balls[i].vx/2000;
+						first_ball.vy += blue_balls[i].vy/1000;
+						first_ball.vx += blue_balls[i].vx/1000;
 						blue_balls[i].x = point_entered_x;
 						blue_balls[i].y = point_entered_y;
 					// flip the direction of the velocity	
 						blue_balls[i].vx *= -1;
 						blue_balls[i].vy *= -1;
-					// move it along a bit
-						blue_balls[i].x += blue_balls[i].vx;
-						blue_balls[i].y += blue_balls[i].vy;
-					// give its momentum to the big ball
 					}
+					// move it along a bit
+					blue_balls[i].x += blue_balls[i].vx;
+					blue_balls[i].y += blue_balls[i].vy;
 				}
 				//balls[i].vy = -balls[i].vy;
 				//balls[i].y += balls[i].vy;
@@ -195,61 +191,45 @@
 					point_entered_x = blue_balls[i].x;
 					point_entered_y = blue_balls[i].y;
 					
-					while (distance_from_first_ball <= second_ball.radius) {
-						blue_balls[i].x += blue_balls[i].vx;
-						blue_balls[i].y += blue_balls[i].vy;
-						distance_from_first_ball = Math.pow(blue_balls[i].x - second_ball.x,2) + Math.pow(blue_balls[i].y - second_ball.y,2);
-						distance_from_first_ball = Math.pow(distance_from_first_ball, 0.5);
-					}
-					point_exit_x = blue_balls[i].x;
-					point_exit_y = blue_balls[i].y;
-					
-					distance_travelled = Math.pow(point_exit_x - point_entered_x, 2) + Math.pow(point_exit_y - point_entered_y,2);
-					distance_travelled = Math.pow(distance_travelled, 0.5);
-					
-					// absorption ratio.. a number between 0 and 1 that indicates how much percent of the object
-					// you actually travelled through. The formula for it is, distance_travelled/diameter since
-					// the diameter is the max distance you can travel.
-					distance_ratio = distance_travelled/(2*second_ball.radius);
+					// absorption ratio.. a number between 0 and 1 that tells you the chances
+					// of having a reflection collision vs just having the force bit come out randomly
 					absorption_ratio = Math.random();
-					if (absorption_ratio*distance_ratio  < 0.01) {
+					if (absorption_ratio  < 0.4) {
+						// brings out a force bit in a random direction
+						expulsion_dir = 2*Math.random()*3.14;
+						random_x = second_ball.x + Math.cos(expulsion_dir)*second_ball.radius;
+						random_y = second_ball.y - Math.sin(expulsion_dir)*second_ball.radius;
+						random_dir = -1.57 + expulsion_dir + Math.random()*3.14;  //1.57 is pi/2
+						random_vx = -Math.cos(random_dir)*force_bit_speed;
+						random_vy = Math.sin(random_dir)*force_bit_speed;
+					//	second_ball.vy += blue_balls[i].vy/2000;
+					//	second_ball.vx += blue_balls[i].vx/2000;
 						
-						blue_balls[i].x += blue_balls[i].vx;
-						blue_balls[i].y += blue_balls[i].vy;
+						blue_balls[i].x = random_x;
+						blue_balls[i].y = random_y;
+						blue_balls[i].vx = random_vx;
+						blue_balls[i].vy = random_vy;
 					}
 					else { // return the force bit in about the same direction as it came
 					// restabalize it and transfer momentum here
-						second_ball.vy += blue_balls[i].vy/2000;
-						second_ball.vx += blue_balls[i].vx/2000;
+					//	second_ball.vy += blue_balls[i].vy/1000;
+					//	second_ball.vx += blue_balls[i].vx/1000;
 						blue_balls[i].x = point_entered_x;
 						blue_balls[i].y = point_entered_y;
 					// flip the direction of the velocity	
 						blue_balls[i].vx *= -1;
 						blue_balls[i].vy *= -1;
-					// move it along a bit
-						blue_balls[i].x += blue_balls[i].vx;
-						blue_balls[i].y += blue_balls[i].vy;
 					}
+					// move it along a bit
+					blue_balls[i].x += blue_balls[i].vx;
+					blue_balls[i].y += blue_balls[i].vy;
 				}
 			}
 		}
 
 		// ENDING THE RESTARTING THINGS *******************************************
-		
-	/*	for (let i = 0; i < 10; i++) {
-			
-			expulsion_dir = Math.random()*3.14;
-			random_x = second_ball.x + Math.cos(expulsion_dir)*second_ball.radius*1.01;
-			random_y = second_ball.y - Math.sin(expulsion_dir)*second_ball.radius*1.01;
-			random_dir = -1.57 + expulsion_dir + Math.random()*3.14;
-			random_vx = Math.cos(random_dir)*force_bit_speed;
-			random_vy = -Math.sin(random_dir)*force_bit_speed;
-			blue_balls.push({age: 0, vx:random_vx, vy:random_vy, x:random_x, y:random_y, radius:1, status:0});
 
-		}		
-		
-	*/	
-		for (let i = 0; i < 500; i++) {
+		for (let i = 0; i < 1000; i++) {
 			// CONTINUE HERE
 			expulsion_dir = 2*Math.random()*3.14;
 			random_x = universe_center_x + Math.cos(expulsion_dir)*universe_radius;
@@ -283,7 +263,7 @@
  
 	canvas.width = window.innerWidth; 
 	canvas.height = window.innerHeight; 
-	document.body.appendChild( container );
+	document.body.appendChild(container);
 	container.appendChild(canvas);	
  
 	ctx.strokeStyle = "#ffffff";
