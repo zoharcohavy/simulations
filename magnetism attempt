@@ -25,19 +25,26 @@
 	var distance_ratio, absorption_ratio;
 	var universe_center_x, universe_center_y, universe_radius;
 	var max_object_speed;
+	var expulsion_multiplier;
+	var counter;
+	const PI = 3.14;
+	const DIRECTION_SPAN_UNIVERSE = 0.1;
+	const DIRECTION_SPAN_ELECTRON = 1.57; // a semi circle
+	
 
     function init(){
        setupCanvas();
 	   start_time = new Date().getTime();
 	   counter = 0;
-	   force_bit_speed = 25;
-	   universe_center_x = 200;
+	   force_bit_speed = 2;
+	   universe_center_x = 400;
 	   universe_center_y = 300;
-	   universe_radius = 500;
-	   max_object_speed = force_bit_speed/50;
+	   universe_radius = 200*4;
+	   expulsion_multiplier = 5;
+	   max_object_speed = force_bit_speed/5;
       //vy = (Math.random() * -15) + -5;
-	  first_ball = {vx:0, vy:0, x:200, y:200, radius:40, status: 0,   color:"red"};
-	  second_ball = {vx:0, vy:0, x:200, y:400, radius:40, status: 0,   color:"red"};
+	  first_ball = {vx:0, vy:0, x:400, y:200, radius:40, status: 0,   color:"red"};
+	  second_ball = {vx:0, vy:0, x:400, y:1500, radius:1000, status: 0,   color:"red"};
 	  
 	 // north_poll_1 = {vx:0, vy:0, x:200, y:200, width:30, status: 0,   color:"red"};
 	 // south_poll_1 = {vx:0, vy:0, x:200, y:200, width:30, status: 0,   color:"red"};
@@ -62,7 +69,7 @@
        
  
              //draw everything
-			 
+			
 			ctx.beginPath();
 			ctx.arc(first_ball.x, first_ball.y, first_ball.radius, 0, Math.PI*2, false);
 			ctx.fillStyle = "blue";
@@ -74,6 +81,8 @@
 			ctx.fillStyle = "blue";
 			ctx.fill();
 			ctx.closePath();
+			
+			
 			
 			for (let i = 0; i < blue_balls.length; i++) {
 				ctx.beginPath();
@@ -107,14 +116,24 @@
 	   
         
         //If either wall is hit, change direction on x axis
+		if (first_ball.vy >= 0) {
+			first_ball.y += Math.min(max_object_speed, first_ball.vy);
+		}
+		else {
+			first_ball.y -= Math.min(max_object_speed, -first_ball.vy);
+		}
+		if (first_ball.vx >= 0) {
+			first_ball.x += Math.min(max_object_speed, first_ball.vx);
+		}
+		else {
+			first_ball.x -= Math.min(max_object_speed, -first_ball.vx);
+		}
 
-		first_ball.y += Math.min(max_object_speed, first_ball.vy);
-		first_ball.x += Math.min(max_object_speed, first_ball.vx);
-		second_ball.x += Math.min(max_object_speed, second_ball.vy);
-		second_ball.y += Math.min(max_object_speed, second_ball.vy);
+		//second_ball.x += Math.min(max_object_speed, second_ball.vx);
+		//second_ball.y += Math.min(max_object_speed, second_ball.vy);
 		for (let i = 0; i < blue_balls.length; i++) {
 			blue_balls[i].age++;
-			if (blue_balls[i].age > 50) {
+			if (blue_balls[i].age > 500) {
 				//balls[i].y = 0;
 				blue_balls.shift();
 			}
@@ -145,7 +164,8 @@
 						expulsion_dir = 2*Math.random()*3.14;
 						random_x = first_ball.x + Math.cos(expulsion_dir)*first_ball.radius;
 						random_y = first_ball.y - Math.sin(expulsion_dir)*first_ball.radius;
-						random_dir = -1.57 + expulsion_dir + Math.random()*3.14;  //1.57 is pi/2
+					//	random_dir = -1.57 + expulsion_dir + Math.random()*3.14;  //1.57 is pi/2
+						random_dir = -0.25 + expulsion_dir + Math.random()*0.5;
 						random_vx = -Math.cos(random_dir)*force_bit_speed;
 						random_vy = Math.sin(random_dir)*force_bit_speed;
 						first_ball.vy += blue_balls[i].vy/2000;
@@ -167,8 +187,8 @@
 						blue_balls[i].vy *= -1;
 					}
 					// move it along a bit
-					blue_balls[i].x += blue_balls[i].vx;
-					blue_balls[i].y += blue_balls[i].vy;
+					blue_balls[i].x += expulsion_multiplier*blue_balls[i].vx;
+					blue_balls[i].y += expulsion_multiplier*blue_balls[i].vy;
 				}
 				//balls[i].vy = -balls[i].vy;
 				//balls[i].y += balls[i].vy;
@@ -180,7 +200,6 @@
 			}*/
 		
 		//*********** RESTARTING THE SAME THING *****************************************************************
-		
 		if ((blue_balls[i].y >= second_ball.y - second_ball.radius && blue_balls[i].y <= second_ball.y + second_ball.radius) && (blue_balls[i].x >= second_ball.x - second_ball.radius && blue_balls[i].x <= second_ball.x + second_ball.radius)) {
 				//if its in the square of the top ball
 				distance_from_first_ball = Math.pow(blue_balls[i].x - second_ball.x,2) + Math.pow(blue_balls[i].y - second_ball.y,2);
@@ -199,7 +218,8 @@
 						expulsion_dir = 2*Math.random()*3.14;
 						random_x = second_ball.x + Math.cos(expulsion_dir)*second_ball.radius;
 						random_y = second_ball.y - Math.sin(expulsion_dir)*second_ball.radius;
-						random_dir = -1.57 + expulsion_dir + Math.random()*3.14;  //1.57 is pi/2
+					//	random_dir = -1.57 + expulsion_dir + Math.random()*3.14;  //1.57 is pi/2
+						random_dir = -0.25 + expulsion_dir + Math.random()*0.5;
 						random_vx = -Math.cos(random_dir)*force_bit_speed;
 						random_vy = Math.sin(random_dir)*force_bit_speed;
 					//	second_ball.vy += blue_balls[i].vy/2000;
@@ -221,17 +241,18 @@
 						blue_balls[i].vy *= -1;
 					}
 					// move it along a bit
-					blue_balls[i].x += blue_balls[i].vx;
-					blue_balls[i].y += blue_balls[i].vy;
+					blue_balls[i].x += expulsion_multiplier*blue_balls[i].vx;
+					blue_balls[i].y += expulsion_multiplier*blue_balls[i].vy;
 				}
 			}
+			// ENDING THE RESTARTING THINGS *******************************************
+			
 		}
 
-		// ENDING THE RESTARTING THINGS *******************************************
-
-		for (let i = 0; i < 1000; i++) {
+		
+		/*for (let i = 0; i < 500; i++) {
 			// CONTINUE HERE
-			expulsion_dir = 2*Math.random()*3.14;
+			expulsion_dir = Math.random()*3.14;
 			random_x = universe_center_x + Math.cos(expulsion_dir)*universe_radius;
 			random_y = universe_center_y - Math.sin(expulsion_dir)*universe_radius;
 			random_dir = -1.57/2 + expulsion_dir + Math.random()*1.57;  //1.57 is pi/2
@@ -240,7 +261,31 @@
 			blue_balls.push({age: 0, vx:random_vx, vy:random_vy, x:random_x, y:random_y, radius:0.5, status:0});
 
 		}
-		
+		*/
+		// forcebits from outer universe
+		for (let i = 0; i < 100; i++) {
+			// CONTINUE HERE
+			expulsion_dir = Math.random()*PI;
+			random_x = universe_center_x + Math.cos(expulsion_dir)*universe_radius;
+			random_y = universe_center_y - Math.sin(expulsion_dir)*universe_radius;
+			random_dir = -DIRECTION_SPAN_UNIVERSE/2 + expulsion_dir + Math.random()*DIRECTION_SPAN_UNIVERSE;  //1.57 is pi/2
+			random_vx = -Math.cos(random_dir)*force_bit_speed;
+			random_vy = Math.sin(random_dir)*force_bit_speed;
+			blue_balls.push({age: 0, vx:random_vx, vy:random_vy, x:random_x, y:random_y, radius:0.5, status:0});
+
+		}
+		for (let i = 0; i < 20; i++) {
+			// CONTINUE HERE
+			expulsion_dir = Math.random()*PI;
+			random_x = second_ball.x + Math.cos(expulsion_dir)*second_ball.radius;
+			random_y = second_ball.y - Math.sin(expulsion_dir)*second_ball.radius;
+			random_dir = -DIRECTION_SPAN_ELECTRON/2 + expulsion_dir + Math.random()*DIRECTION_SPAN_ELECTRON;  //1.57 is pi/2
+			random_vx = Math.cos(random_dir)*force_bit_speed;
+			random_vy = -Math.sin(random_dir)*force_bit_speed;
+			blue_balls.push({age: 0, vx:random_vx, vy:random_vy, x:random_x, y:random_y, radius:0.5, status:0});
+
+		}		
+
 		/*for (let i = 0; i < 20; i++) {
 			random_x = Math.random()*20 + 580;
 			random_y = Math.random()*600;
