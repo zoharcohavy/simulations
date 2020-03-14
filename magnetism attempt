@@ -178,8 +178,8 @@
 					}
 					else { // return the force bit in about the same direction as it came
 					// restabalize it and transfer momentum here
-						first_ball.vy += blue_balls[i].vy/1000;
-						first_ball.vx += blue_balls[i].vx/1000;
+						first_ball.vy += blue_force[i].vy/1000;
+						first_ball.vx += blue_force[i].vx/1000;
 						blue_force[i].x = point_entered_x;
 						blue_force[i].y = point_entered_y;
 					// flip the direction of the velocity	
