@@ -1,6 +1,6 @@
 # simulations
 
-Magnetism Attempt (250 lines) - best magnetism simulation so far
+Magnetism Attempt (392 lines) - best magnetism simulation so far
 
 Orbits (158 lines) - Best gravity simulation I have so far
 
