@@ -45,7 +45,7 @@
 	   max_object_speed = force_bit_speed/5;
       //vy = (Math.random() * -15) + -5;
 	  first_ball = {vx:0, vy:0, x:400, y:200, radius:40, status: 0,   color:"red"};
-	  second_ball = {vx:0, vy:0, x:400, y:300, radius:40, status: 0,   color:"red"};
+	  second_ball = {vx:0, vy:0, x:400, y:350, radius:40, status: 0,   color:"red"};
 	
        red_force = [];
 	   blue_force = [];
@@ -136,17 +136,13 @@
 			red_force[i].x += red_force[i].vx;
 		}
 		for (let i = 0; i < blue_force.length; i++) {
-			blue_force[i].age++;
+/*			blue_force[i].age++;
 			if (blue_force[i].age > 500) {
 				//balls[i].y = 0;
 				blue_force.shift();
-			}
-			/*if (red_force[i].x > 2000 || red_force[i].x < -200) {
-				red_force.shift();
-				number_of_balls--;
 			}*/
-			blue_force[i].y += blue_force[i].vy;
-			blue_force[i].x += blue_force[i].vx;
+			blue_force[i].y += blue_force[i].vy*1.7;
+			blue_force[i].x += blue_force[i].vx*1.7;
 			
 			if ((blue_force[i].y >= first_ball.y - first_ball.radius && blue_force[i].y <= first_ball.y + first_ball.radius) && (blue_force[i].x >= first_ball.x - first_ball.radius && blue_force[i].x <= first_ball.x + first_ball.radius)) {
 				//if its in the square of the top ball
@@ -157,8 +153,8 @@
 					//this is if collision is detected
 					
 					blue_force[i].age = 25;
-					first_ball.vy += blue_force[i].vy/1000;
-					first_ball.vx += blue_force[i].vx/1000;
+					first_ball.vy += blue_force[i].vy/500;
+					first_ball.vx += blue_force[i].vx/500;
 
 					// flip the direction of the velocity	
 					blue_force[i].vx *= -1;
@@ -197,7 +193,9 @@
 				distance_from_first_ball = Math.pow(distance_from_first_ball, 0.5);
 				if (distance_from_first_ball <= second_ball.radius) {
 				
-					//WORK HERE NEXT
+					second_ball.vx += blue_force[i].vx/500;
+					second_ball.vy += blue_force[i].vy/500;
+					
 					// flip the direction of the velocity	
 					blue_force[i].vx *= -1;
 					blue_force[i].vy *= -1;
@@ -235,7 +233,7 @@
 
 	for (let i = 0; i < red_force.length; i++) {
 			red_force[i].age++;
-			if (red_force[i].age > 70) {
+			if (red_force[i].age > 500) {
 				//balls[i].y = 0;
 				red_force.shift();
 			}
@@ -313,8 +311,8 @@
 					//this is if collision is detected
 					
 					red_force[i].age = 25;
-					first_ball.vy += red_force[i].vy/1000;
-					first_ball.vx += red_force[i].vx/1000;
+					first_ball.vy += red_force[i].vy/500;
+					first_ball.vx += red_force[i].vx/500;
 
 					// flip the direction of the velocity	
 					red_force[i].vx *= -1;
@@ -340,7 +338,7 @@
 		}
 		*/
 		// forcebits from outer universe
-		/*for (let i = 0; i < 100; i++) {
+		/*for (let i = 0; i < 2; i++) {
 			// CONTINUE HERE
 			expulsion_dir = Math.random()*PI;
 			random_x = universe_center_x + Math.cos(expulsion_dir)*universe_radius;
@@ -395,7 +393,8 @@
 			red_force.push({age: 0, vx:random_vx, vy:random_vy, x:random_x, y:random_y, radius:0.5, status:0});
 
 		}*/
-		//the gun shooting thingy fml
+		//the gun shooting thingy 
+		/*
 		counter++;
 		if (counter > 30) {
 			random_x = 500;
@@ -404,9 +403,79 @@
 			random_vx = -1;
 			random_vy = 0;
 			blue_force.push({age: 0, vx:random_vx, vy:random_vy, x:random_x, y:random_y - 250, radius:1.5, status:0});
+			blue_force.push({age: 0, vx:random_vx, vy:random_vy, x:random_x, y:random_y - 200, radius:1.5, status:0});
+			blue_force.push({age: 0, vx:random_vx, vy:random_vy, x:random_x, y:random_y - 50, radius:1.5, status:0});
+			blue_force.push({age: 0, vx:random_vx, vy:random_vy, x:random_x, y:random_y + 10, radius:1.5, status:0});
 			red_force.push({age: 0, vx:random_vx, vy:random_vy, x:random_x, y:random_y - 260, radius:1.5, status:0});
+			red_force.push({age: 0, vx:random_vx, vy:random_vy, x:random_x, y:random_y - 210, radius:1.5, status:0});
+			red_force.push({age: 0, vx:random_vx, vy:random_vy, x:random_x, y:random_y - 60, radius:1.5, status:0});
+			red_force.push({age: 0, vx:random_vx, vy:random_vy, x:random_x, y:random_y, radius:1.5, status:0});
+			
+			random_x = 250;
+			random_y = 400;
+			random_vx = 1;
+			random_vy = 0;
+			blue_force.push({age: 0, vx:random_vx, vy:random_vy, x:random_x, y:random_y - 250, radius:1.5, status:0});
+			blue_force.push({age: 0, vx:random_vx, vy:random_vy, x:random_x, y:random_y - 200, radius:1.5, status:0});
+			blue_force.push({age: 0, vx:random_vx, vy:random_vy, x:random_x, y:random_y - 50, radius:1.5, status:0});
+			blue_force.push({age: 0, vx:random_vx, vy:random_vy, x:random_x, y:random_y + 10, radius:1.5, status:0});
+			red_force.push({age: 0, vx:random_vx, vy:random_vy, x:random_x, y:random_y - 260, radius:1.5, status:0});
+			red_force.push({age: 0, vx:random_vx, vy:random_vy, x:random_x, y:random_y - 210, radius:1.5, status:0});
+			red_force.push({age: 0, vx:random_vx, vy:random_vy, x:random_x, y:random_y - 60, radius:1.5, status:0});
+			red_force.push({age: 0, vx:random_vx, vy:random_vy, x:random_x, y:random_y, radius:1.5, status:0});
+			
+			random_x = 400;
+			random_y = 20;
+			random_vx = 0;
+			random_vy = 1;
+			blue_force.push({age: 0, vx:random_vx, vy:random_vy, x:random_x, y:random_y, radius:1.5, status:0});
+			blue_force.push({age: 0, vx:random_vx, vy:-random_vy, x:random_x, y:random_y + 450, radius:1.5, status:0});
+			red_force.push({age: 0, vx:random_vx, vy:random_vy, x:random_x - 10, y:random_y, radius:1.5, status:0});
+			red_force.push({age: 0, vx:random_vx, vy:-random_vy, x:random_x - 10, y:random_y + 450, radius:1.5, status:0});
 			counter = 0;
 		}
+		*/
+		for (let i = 0; i < 2; i++) {
+			// CONTINUE HERE
+			
+			expulsion_dir = Math.random()*PI;
+			random_x = universe_center_x + Math.cos(expulsion_dir)*universe_radius;
+			random_y = universe_center_y - Math.sin(expulsion_dir)*universe_radius;
+			random_dir = -DIRECTION_SPAN_UNIVERSE/2 + expulsion_dir + Math.random()*DIRECTION_SPAN_UNIVERSE;  //1.57 is pi/2
+			random_vx = -Math.cos(random_dir)*force_bit_speed;
+			random_vy = Math.sin(random_dir)*force_bit_speed;
+			blue_force.push({age: 0, vx:random_vx, vy:random_vy, x:random_x, y:random_y, radius:1.5, status:0});
+			expulsion_dir = -Math.random()*PI;
+			random_x = universe_center_x + Math.cos(expulsion_dir)*universe_radius;
+			random_y = universe_center_y - Math.sin(expulsion_dir)*universe_radius;
+			random_dir = -DIRECTION_SPAN_UNIVERSE/2 + expulsion_dir + Math.random()*DIRECTION_SPAN_UNIVERSE;  //1.57 is pi/2
+			random_vx = -Math.cos(random_dir)*force_bit_speed;
+			random_vy = Math.sin(random_dir)*force_bit_speed;
+			blue_force.push({age: 0, vx:random_vx, vy:random_vy, x:random_x, y:random_y, radius:1.5, status:0});
+			
+		}
+		
+		for (let i = 0; i < 2; i++) {
+			// CONTINUE HERE
+			
+			expulsion_dir = -Math.random()*PI;
+			random_x = universe_center_x + Math.cos(expulsion_dir)*universe_radius;
+			random_y = universe_center_y - Math.sin(expulsion_dir)*universe_radius;
+			random_dir = -DIRECTION_SPAN_UNIVERSE/2 + expulsion_dir + Math.random()*DIRECTION_SPAN_UNIVERSE;  //1.57 is pi/2
+			random_vx = -Math.cos(random_dir)*force_bit_speed;
+			random_vy = Math.sin(random_dir)*force_bit_speed;
+			red_force.push({age: 0, vx:random_vx, vy:random_vy, x:random_x, y:random_y, radius:1.5, status:0});
+			expulsion_dir = Math.random()*PI;
+			random_x = universe_center_x + Math.cos(expulsion_dir)*universe_radius;
+			random_y = universe_center_y - Math.sin(expulsion_dir)*universe_radius;
+			random_dir = -DIRECTION_SPAN_UNIVERSE/2 + expulsion_dir + Math.random()*DIRECTION_SPAN_UNIVERSE;  //1.57 is pi/2
+			random_vx = -Math.cos(random_dir)*force_bit_speed;
+			random_vy = Math.sin(random_dir)*force_bit_speed;
+			red_force.push({age: 0, vx:random_vx, vy:random_vy, x:random_x, y:random_y, radius:1.5, status:0});		
+
+		}
+		
+		
        
 		var dt = new Date();
 		message = "magnetism stuff";// + dt.getTime();
