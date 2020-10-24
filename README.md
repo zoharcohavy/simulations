@@ -4,6 +4,9 @@ Magnetism Attempt (392 lines) - best magnetism simulation so far
 
 Orbits (158 lines) - Best gravity simulation I have so far
 
+Single Slit (180 lines) - Simulation of the single slit experiment.
+the on off pattern is produced.
+
 Parkour Physics (232 lines) - This one is for a scene used in this video
 https://www.youtube.com/watch?v=rYNdf4m4OZw
 
