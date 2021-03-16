@@ -1,6 +1,8 @@
 # simulations
 
-Magnetism Attempt (392 lines) - best magnetism simulation so far
+Repulsion (502 lines) - simulation of magnets repelling.
+
+Attraction (~500 lines) - simulation of magnets attracting
 
 Orbits (158 lines) - Best gravity simulation I have so far
 
