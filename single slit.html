@@ -26,7 +26,7 @@
     function init(){
        setupCanvas();
 	   //start_time = new Date().getTime();
-	   force_bit_speed = 4;
+	   force_bit_speed = 2;
 	   collisions_detected = 0;
 	  first_wall = {x:200, y:245 - 205 + 50, width:10, height:130, status: 0,   color:"red"};
 	  second_wall = {x:200, y:180 + 105 + 50, width:10, height:130, status: 0,   color:"red"};
@@ -103,7 +103,7 @@
 				balls.shift();
 				number_of_balls--;
 			}
-			if (balls[i].x > 2000 || balls[i].x < -200) {
+			if (balls[i].x > 800 || balls[i].x < -200) {
 				balls.shift();
 				number_of_balls--;
 			}
@@ -111,11 +111,30 @@
 			balls[i].x += balls[i].vx;
 			if ((balls[i].y >= first_wall.y && balls[i].y <= first_wall.y + first_wall.height) && (balls[i].x >= first_wall.x && balls[i].x <= first_wall.x + first_wall.width)) {
 				balls[i].x += first_wall.width + 2;
-				scatter_angle_theta = -3.14/2;
-				while (scatter_angle_theta < 3.14/2) {
-					scatter_angle_theta += 0.015;
-					balls.push({age: 0, vx:force_bit_speed*Math.cos(scatter_angle_theta), vy:force_bit_speed*Math.sin(scatter_angle_theta), x:balls[i].x, y:balls[i].y, radius:1.5, status:0});
-				}
+				scatter_angle_theta = 0.115;
+				//while (scatter_angle_theta < 3.14/2) {
+					//scatter_angle_theta += 0.015;
+				balls.push({age: 0, vx:force_bit_speed*Math.cos(scatter_angle_theta), vy:force_bit_speed*Math.sin(scatter_angle_theta), x:balls[i].x, y:balls[i].y, radius:1.5, status:0});
+				//}
+				scatter_angle_theta = 0.25;
+				balls.push({age: 0, vx:force_bit_speed*Math.cos(scatter_angle_theta), vy:force_bit_speed*Math.sin(scatter_angle_theta), x:balls[i].x, y:balls[i].y, radius:1.5, status:0});
+				scatter_angle_theta = 0.355;
+				balls.push({age: 0, vx:force_bit_speed*Math.cos(scatter_angle_theta), vy:force_bit_speed*Math.sin(scatter_angle_theta), x:balls[i].x, y:balls[i].y, radius:1.5, status:0});
+				scatter_angle_theta = 0.5;
+				balls.push({age: 0, vx:force_bit_speed*Math.cos(scatter_angle_theta), vy:force_bit_speed*Math.sin(scatter_angle_theta), x:balls[i].x, y:balls[i].y, radius:1.5, status:0});
+				scatter_angle_theta = 0.635;
+				balls.push({age: 0, vx:force_bit_speed*Math.cos(scatter_angle_theta), vy:force_bit_speed*Math.sin(scatter_angle_theta), x:balls[i].x, y:balls[i].y, radius:1.5, status:0});
+				
+				balls.push({age: 0, vx:force_bit_speed*Math.cos(scatter_angle_theta), vy:force_bit_speed*Math.sin(scatter_angle_theta), x:balls[i].x, y:balls[i].y, radius:1.5, status:0});
+				scatter_angle_theta = -0.025;
+				balls.push({age: 0, vx:force_bit_speed*Math.cos(scatter_angle_theta), vy:force_bit_speed*Math.sin(scatter_angle_theta), x:balls[i].x, y:balls[i].y, radius:1.5, status:0});
+				scatter_angle_theta = -0.14;
+				balls.push({age: 0, vx:force_bit_speed*Math.cos(scatter_angle_theta), vy:force_bit_speed*Math.sin(scatter_angle_theta), x:balls[i].x, y:balls[i].y, radius:1.5, status:0});
+				scatter_angle_theta = -0.29;
+				balls.push({age: 0, vx:force_bit_speed*Math.cos(scatter_angle_theta), vy:force_bit_speed*Math.sin(scatter_angle_theta), x:balls[i].x, y:balls[i].y, radius:1.5, status:0});
+				scatter_angle_theta = -0.445;
+				balls.push({age: 0, vx:force_bit_speed*Math.cos(scatter_angle_theta), vy:force_bit_speed*Math.sin(scatter_angle_theta), x:balls[i].x, y:balls[i].y, radius:1.5, status:0});
+				
 				balls[i].x = -100;
 				balls[i].vx = 0;
 				balls[i].vy = force_bit_speed;
@@ -123,25 +142,47 @@
 			
 			if ((balls[i].y >= second_wall.y && balls[i].y <= second_wall.y + second_wall.height) && (balls[i].x >= second_wall.x && balls[i].x <= second_wall.x + second_wall.width)) {
 				balls[i].x += first_wall.width + 2;
-				scatter_angle_theta = -3.14/2;
-				while (scatter_angle_theta < 3.14/2) {
-					scatter_angle_theta += 0.015;
-					balls.push({age: 0, vx:force_bit_speed*Math.cos(scatter_angle_theta), vy:force_bit_speed*Math.sin(scatter_angle_theta), x:balls[i].x, y:balls[i].y, radius:1.5, status:0});
-				}
+				scatter_angle_theta = -0.115;
+				//while (scatter_angle_theta < 3.14/2) {
+					//scatter_angle_theta += 0.015;
+				balls.push({age: 0, vx:force_bit_speed*Math.cos(scatter_angle_theta), vy:force_bit_speed*Math.sin(scatter_angle_theta), x:balls[i].x, y:balls[i].y, radius:1.5, status:0});
+				scatter_angle_theta = 0.025;
+				balls.push({age: 0, vx:force_bit_speed*Math.cos(scatter_angle_theta), vy:force_bit_speed*Math.sin(scatter_angle_theta), x:balls[i].x, y:balls[i].y, radius:1.5, status:0});
+				scatter_angle_theta = 0.14;
+				balls.push({age: 0, vx:force_bit_speed*Math.cos(scatter_angle_theta), vy:force_bit_speed*Math.sin(scatter_angle_theta), x:balls[i].x, y:balls[i].y, radius:1.5, status:0});
+				scatter_angle_theta = 0.29;
+				balls.push({age: 0, vx:force_bit_speed*Math.cos(scatter_angle_theta), vy:force_bit_speed*Math.sin(scatter_angle_theta), x:balls[i].x, y:balls[i].y, radius:1.5, status:0});
+				scatter_angle_theta = 0.445;
+				balls.push({age: 0, vx:force_bit_speed*Math.cos(scatter_angle_theta), vy:force_bit_speed*Math.sin(scatter_angle_theta), x:balls[i].x, y:balls[i].y, radius:1.5, status:0});
+				
+				balls.push({age: 0, vx:force_bit_speed*Math.cos(scatter_angle_theta), vy:force_bit_speed*Math.sin(scatter_angle_theta), x:balls[i].x, y:balls[i].y, radius:1.5, status:0});
+				scatter_angle_theta = -0.25;
+				balls.push({age: 0, vx:force_bit_speed*Math.cos(scatter_angle_theta), vy:force_bit_speed*Math.sin(scatter_angle_theta), x:balls[i].x, y:balls[i].y, radius:1.5, status:0});
+				scatter_angle_theta = -0.355;
+				balls.push({age: 0, vx:force_bit_speed*Math.cos(scatter_angle_theta), vy:force_bit_speed*Math.sin(scatter_angle_theta), x:balls[i].x, y:balls[i].y, radius:1.5, status:0});
+				scatter_angle_theta = -0.5;
+				balls.push({age: 0, vx:force_bit_speed*Math.cos(scatter_angle_theta), vy:force_bit_speed*Math.sin(scatter_angle_theta), x:balls[i].x, y:balls[i].y, radius:1.5, status:0});
+				scatter_angle_theta = -0.635;
+				balls.push({age: 0, vx:force_bit_speed*Math.cos(scatter_angle_theta), vy:force_bit_speed*Math.sin(scatter_angle_theta), x:balls[i].x, y:balls[i].y, radius:1.5, status:0});
+				
+				
+				//}
 				balls[i].x = -100;
 				balls[i].vx = 0;
 				balls[i].vy = force_bit_speed;
 			}
 		}
 		counter++;
-		if (counter > 7) {
+		if (counter > 14) {
 			// CONTINUE HERE
 			expulsion_dir = -3.14/4;
 			random_vx = force_bit_speed;
 			random_vy = 0;
-			for (let j = 0; j < 24; j++) {
+			balls.push({age: 0, vx:random_vx, vy:random_vy, x:50, y:220 + 5*0, radius:1.5, status:0});
+			balls.push({age: 0, vx:random_vx, vy:random_vy, x:50, y:220 + 5*23, radius:1.5, status:0});
+			/*for (let j = 0; j < 24; j++) {
 				balls.push({age: 0, vx:random_vx, vy:random_vy, x:50, y:220 + 5*j, radius:1.5, status:0});
-			}
+			}*/
 			counter = 0;
 		}
        
