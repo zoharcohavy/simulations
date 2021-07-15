@@ -1,4 +1,4 @@
-5 Files total all .html files that can be opened on a google chrome browser
+# 5 Files total all .html files that can be opened on a google chrome browser
 
 doubleslit_-onlyinner: this file shows the inner 2 surfaces in the experiment, these surfaces produce a stretched out pattern on the screen/wall
 
