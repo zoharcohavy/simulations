@@ -1,6 +1,6 @@
 # 3 files
 
-All these files can be opened as long as the source code is copied to a .html file. 
+All these files can be opened (with google chrome) as long as the source code is copied to a .html file. 
 
 singleslit_-alldegrees: The single slit experiment with all degrees shown, just like in the youtube video.
 
